@@ -1,0 +1,128 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <span flex></span>
+        <md-button  href="#login_arab" class="md-raised" aria-label="Learn More" >
+            تسجيل الدخول
+        </md-button>
+    </div>
+</md-toolbar>
+
+
+<md-content layout-align="center center">
+    <div layout="column" layout-align="center center">
+        <md-card  dir="rtl" lang="ar"  layout-padding class="card-40-center" flex="flex">
+            <md-card-title>
+                <md-card-title-text layout-align="center center">
+                    <span style="font-size: x-large; color: darkorange " class="md-headline">حساب جديد</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <!-- search box push it on the map-->
+                <input id="pac-input" class="controls" type="text" placeholder="ابحث عن عنوان">
+
+                <form id="RegistrationForm" name="RegistrationForm" ng-controller="RegistrationFormController" layout="column" ng-cloak ng-submit="submit()">
+                    <md-input-container  md-no-float class="md-block">
+                        <!--<ng-md-icon icon="business" style="fill:orange" size="28"></ng-md-icon>-->
+                        <md-icon icon="business" style="color:orange" size="28">business</md-icon>
+                        <input required name="clientName" ng-model="company.name" placeholder="اسم الشركة">
+                        <div ng-messages="RegistrationForm.companyname.$error">
+                            <div ng-message="required">الرجاء اختيار اسم الشركة</div>
+                        </div>
+                    </md-input-container>
+
+
+                    <div layout="row">
+                        <md-input-container   md-no-float  flex="50">
+                            <!--<ng-md-icon  icon="email" style="fill:orange" size="28"></ng-md-icon>-->
+                            <md-icon  icon="email" style="color:orange" size="28">email</md-icon>
+                            <input required type="email"  placeholder="الايميل" name="clientEmail" ng-model="company.email"
+                                   minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                            <div ng-messages="projectForm.clientEmail.$error" role="alert">
+                                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                    يرجى إدخال البريد الإلكتروني الصحيح</div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container   md-no-float   flex="50">
+                            <!--<ng-md-icon  icon="lock" style="fill:orange" size="28"></ng-md-icon>-->
+                            <md-icon  icon="lock" style="color:orange" size="28">lock</md-icon>
+                            <input required type="text"  placeholder="كلمة المرور" name="password" ng-model="company.password"
+                                   minlength="6"  />
+                            <div ng-messages="RegistrationForm.password.$error" role="alert">
+                                <div ng-message-exp="['required', 'minlength']">
+                                    كلمة المرور يجب انا لا تقل عن 6 احرف او ارقام </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+
+                    <md-input-container   md-no-float   class="md-block" >
+                        <!--<ng-md-icon  icon="phone" style="fill:orange" size="28"></ng-md-icon>-->
+                        <md-icon  icon="phone" style="color:orange" size="28">phone</md-icon>
+                        <input required type="text"  placeholder="الموبايل  ########9665" name="mobile" ng-model="company.mobile"
+                               minlength="12" maxlength="12"   />
+                        <div ng-messages="RegistrationForm.mobile.$error" role="alert">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                                الرجاء إدخال رقم جوال صحيح مثل 966581049395</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container  md-no-float  class="md-block" >
+                        <!--<ng-md-icon  icon="card_giftcard" style="fill:orange" size="28"></ng-md-icon>-->
+                        <md-icon  icon="card_giftcard" style="color:orange" size="28">card_giftcard</md-icon>
+                        <label>نوع المنتج</label>
+                        <md-select name="type" ng-model="company.productsype"  ng-required ="true">
+                            <md-option value="food">أطعمة</md-option>
+                            <md-option value="heavy">سلع ثقيلة</md-option>
+                            <md-option value="soft">سلع خفيفة</md-option>
+                        </md-select>
+                        <div ng-messages="RegistrationForm.productsype.$error" role="alert">
+                            <div ng-message-exp="['required']">
+                                الرجاء اختيار نوع المنتج</div>
+                        </div>
+                    </md-input-container>
+
+
+                    <md-input-container  md-no-float class="md-block">
+
+
+                        <!--<ng-md-icon  icon="location_city" style="fill:orange" size="28"></ng-md-icon>-->
+                        <md-icon  icon="location_city" style="color:orange" size="28">location_city</md-icon>
+                        <label>المدينة</label>
+                        <md-select ng-model="company.city"  required="true">
+                            <md-option value="jeddah">جدة</md-option>
+                            <md-option value="riyadh">الرياض</md-option>
+                            <md-option value="dammam">الدمام</md-option>
+                            <md-option value="Mecca">مكة</md-option>
+                            <md-option value="medina">المدينة</md-option>
+                        </md-select>
+                        <div ng-messages="RegistrationForm.city.$error" role="alert">
+                            <div ng-message-exp="['required']">
+                                الرجاء اختيار المدينة</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container md-no-float class="md-block">
+
+                        <div layout=" row">
+                            <ng-md-icon icon="location_on" style="fill:rgb(247, 88, 75)" size="35" flex="50" ></ng-md-icon>
+                            <label flex="70"><span style="color: transparent">...........</span>موقع الشركة</label>
+                        </div>
+                        <div style="color: red" id="maphint" class="hint" hidden>Click on the map to point to your company location!</div>
+
+                        <div ng-model="company.map" id="map_canvas" style="width:500px; height:250px; margin-left:15px;"></div>
+
+
+                    </md-input-container>
+                    <md-card-actions layout="row" layout-align="center">
+                        <div align="center">
+                            <md-button id="submit" class="md-primary md-raised"   ng-disabled="RegistrationForm.$invalid" type="submit">تسجيل</md-button>
+                        </div>
+                    </md-card-actions>
+                </form>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>
+
+
+

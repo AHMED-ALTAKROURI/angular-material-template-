@@ -1,0 +1,206 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <span flex></span>
+    </div>
+</md-toolbar>
+
+<!-- this form assumed you already logged in -->
+<md-content layout-align="center center">
+    <div layout="column" layout-align="center center">
+
+        <md-card id="requestcard" layout-padding class="card-40-center" flex="flex">
+            <md-card-title>
+                <md-card-title-text layout-align="center center">
+                    <span style="font-size: large"  class="md-headline">Request a Delivery</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+
+                <form id="RequestForm" name="RequestForm" ng-controller="RequestFormController" layout="column" ng-cloak ng-submit="submit()">
+
+
+                    <!-- push on the map later-->
+                    <input id="pac-input" class="controls" type="text" placeholder="Search PickUp">
+                    <input id="pac-input2" class="controls" type="text" placeholder="Search DropOff">
+                    <br>
+                    <br>
+                    <md-divider layout="row">
+                        <ng-md-icon flex="10" icon="arrow_upwards" style="fill:green" size="40"></ng-md-icon>
+                        <label  style="font-size: large" flex="10">Pickup</label>
+                        <br>
+                    </md-divider>
+
+
+                    <div style="font-size: small">{{session.data.address}} <br>
+                        <a id="hreflocation" style="color: orange; font-size:small; text-decoration: none" href="" ng-click="showMap( )"><span>Default Location</span></a>
+                    </div>
+
+
+                    <md-input-container md-no-float class="md-block" id="pickupmap" >
+                        <div align="center" style="color: red" id="pickuphint" class="hint" hide>Choose a pickup location from the map</div>
+                        <div  name="map" ng-model="map" id="map_canvas" style="width:520px; height:250px; margin-left:15px;" ></div>
+                    </md-input-container>
+
+
+
+                    <br>
+                    <br>
+                    <md-divider  layout="row" 	>
+                        <ng-md-icon flex ="10"   icon="arrow_downward" style="fill:red" size="40"></ng-md-icon>
+                        <label style="font-size: large" flex="10">Dropoff</label>
+                    </md-divider>
+
+
+                    <div layout="row">
+                        <md-input-container  md-no-float flex="50">
+                            <ng-md-icon icon="person" style="fill:orange" size="25"></ng-md-icon>
+
+                            <input required id="name" name="name" ng-model="request.name" placeholder="Name">
+                            <div ng-messages="RequestForm.name.$error">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container   md-no-float flex="50" >
+                            <ng-md-icon  icon="phone" style="fill:orange" size="25"></ng-md-icon>
+                            <input required type="text"  placeholder="Mobile 9665########" name="mobile" ng-model="request.mobile"
+                                   minlength="12" maxlength="12"   />
+                            <div ng-messages="RegistrationForm.mobile.$error" role="alert">
+                                <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                                    Please Enter valid Mobile number e.g 966581049395 </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+
+
+                    <br>
+
+
+                    <md-input-container md-no-float class="md-block">
+                        <div align="center" style="color: red" id="dropoffhint" class="hint hidden"  hidden>Choose a Dropoff location from the map</div>
+                        <div ng-model="company.map2" id="map_canvas2" style="width:520px; height:250px; margin-left:15px;"></div>
+                        <div style="font-size: small">Copy location form <ng-md-icon icon="whatsapp" style="fill:green" size="30"></ng-md-icon>
+                            and paste in the "Search" box below.</div>
+                    </md-input-container>
+
+                    <br>
+                    <md-divider layout="row">
+                        <label style="font-size: x-large" flex="5">Items</label>
+                    </md-divider>
+
+
+                    <br>
+
+
+
+
+                    <div  align="center" style="color: red" id="itemshint" class="hint" hidden >please choose item type</div>
+                    <div layout="row">
+                        <div flex="80">
+                            <md-icon style="height:45px; width: 45px; /*fill:lightgrey*/" md-svg-src="/kc/public/Dev-Server-Resources/item-icons/s.svg"></md-icon>
+                            <label>Small</label>
+                        </div>
+                        <div layout="row" flex="30">
+                            <md-button class="md-icon-button" aria-label="test" ng-click="remove('#SmallItems')">
+                                <ng-md-icon icon="remove" style="fill:orange" size="30"></ng-md-icon>
+                            </md-button>
+                            <div id="SmallItems">
+                                <label style="font-size: x-large; color: lightgrey">0</label>
+                            </div>
+                            <md-button class="md-icon-button" aria-label="test" ng-click="add('#SmallItems')">
+                                <ng-md-icon icon="add" style="fill:orange" size="30"></ng-md-icon>
+                            </md-button>
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <div layout="row">
+                        <div flex="80">
+                            <md-icon style="height:45px; width: 45px; /*fill:lightgrey*/" md-svg-src="/kc/public/Dev-Server-Resources/item-icons/m.svg"  ></md-icon>
+                            <label>Medium</label>
+                        </div>
+
+                        <div layout="row" flex="30">
+                            <md-button class="md-icon-button" aria-label="whatever" ng-click="remove('#MediumItems')">
+                                <ng-md-icon icon="remove" style="fill:orange" size="30"></ng-md-icon>
+                            </md-button>
+                            <div id="MediumItems">
+                                <label style="font-size: x-large; color: lightgrey">0</label>
+                            </div>
+                            <md-button class="md-icon-button" aria-label="whatever" ng-click="add('#MediumItems')">
+                                <ng-md-icon icon="add" style="fill:orange" size="30"></ng-md-icon>
+                            </md-button>
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <div layout="row">
+                        <div flex="80">
+                            <md-icon style="height:45px; width: 45px; /*fill:lightgrey*/" md-svg-src="/kc/public/Dev-Server-Resources/item-icons/l.svg" ></md-icon>
+                            <label>Large</label>
+                        </div>
+                        <div layout="row" flex="30">
+                            <md-button class="md-icon-button" aria-label="test" ng-click="remove('#LargeItems')">
+                                <ng-md-icon icon="remove" style="fill:orange" size="30"></ng-md-icon>
+                            </md-button>
+                            <div id="LargeItems">
+                                <label style="font-size: x-large; color: lightgrey">0</label>
+                            </div>
+                            <md-button class="md-icon-button" aria-label="test" ng-click="add('#LargeItems')">
+                                <ng-md-icon icon="add" style="fill:orange" size="30"></ng-md-icon>
+                            </md-button>
+                        </div>
+                    </div>
+
+                    <md-divider>
+                    </md-divider>
+
+                    <br>
+                    <md-switch ng-model="request.cashstatus"  ng-change="disableCash()"  aria-label="Switch 2" ng-true-value="'yup'" ng-false-value="'nope'" class="md-accent">
+                        Cash on delivery?
+                    </md-switch>
+
+
+                    <div id="cash" hidden>
+                        <md-input-container  md-no-float class="md-block" >
+                            <div style="color: red" id="cashhint" class="hint" hidden >how much?</div>
+                            <ng-md-icon  icon="attach_money" style="fill:orange" size="25"></ng-md-icon>SR
+                            <input ng-model="request.cash" type="number" id="cashamount" name="cashamount" step="1" placeholder="Cash Amount">
+                            <div ng-messages="RequestForm.cashamount.$error">
+                                <div ng-message="required">How much?</div>
+                            </div>
+
+                        </md-input-container>
+                    </div>
+                    <br>
+                    <div>
+                        <label>Transportation fees (15 SR) Will be paid by:</label>
+                        <br><br>
+                        <md-input-container  md-no-float class="md-block" >
+                            <md-radio-group ng-model="request.fees"  name="fees" required>
+                                <md-radio-button value="sender" class="md-accent" md-selected>Sender (you)</md-radio-button>
+                                <md-radio-button value="reciver">Package Receiver ({{request.name}})</md-radio-button>
+                            </md-radio-group>
+                            <div ng-messages="RequestForm.fees.$error">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+
+
+                    </div>
+
+
+                    <md-card-actions layout="row" layout-align="center">
+                        <div align="center">
+                            <md-button id="submit" class="md-primary md-raised" ng-disabled="RequestForm.$invalid" type="submit">Request</md-button>
+                        </div>
+                    </md-card-actions>
+                </form>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>
+
+

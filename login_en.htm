@@ -1,0 +1,82 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+
+        <md-button href="#login_arab">
+            <label style="color:rgb(40,121,202)" >عربي</label>
+            <ng-md-icon icon="language" style="fill:rgb(244, 170, 47)" size="28"></ng-md-icon>
+        </md-button>
+<!--
+        <md-button class="md-icon-button" aria-label="Favorite">
+            <ng-md-icon icon="twitter" style="fill:#00aced" size="28"></ng-md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Favorite">
+            <ng-md-icon icon="facebook" style="fill:#3b5998 " size="28"></ng-md-icon>
+        </md-button>-->
+        <span flex></span>
+
+
+
+    <!--    <md-button  href="#register_english" class="md-raised" aria-label="Learn More" >
+            SignUp
+        </md-button>-->
+
+    </div>
+</md-toolbar>
+<br>
+<br>
+<md-content layout-align="center center">
+    <div layout="column" layout-align="center center">
+        <md-card layout-padding class="card-40-center" flex="flex">
+            <md-card-title>
+                <md-card-title-text layout-align="center center">
+                    <span style="font-size: large"  class="md-headline"><span style="color: transparent">Welcome Please sign in with your </span></span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <form id="LoginForm" name="LoginForm" ng-controller="LoginFormController" layout="column" ng-cloak ng-submit="submit()">
+                    <md-input-container  md-no-float class="md-block">
+                         <div align="center" style="color: red" id="loginerror" class="hint" hidden>incorrect email or password!!</div>
+
+
+                        <!--<ng-md-icon  icon="email" style="fill:orange" size="28" flex="10"></ng-md-icon>
+                         <i class="material-icons" style="fill:orange" size="28">email</i>-->
+
+                         <md-icon size="48" icon="email" style="color: orange; ">email</md-icon>
+                        <input required type="email"  placeholder="Email" name="clientEmail" ng-model="user.email"
+                               minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+
+                        <div ng-messages="projectForm.clientEmail.$error" role="alert">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                Please Enter a valid email</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container   md-no-float   class="md-block">
+                         <div></div>
+                        <md-icon  icon="lock" style="color: orange" size="28">lock</md-icon>
+                        <input required type="password"  placeholder="Password" name="password" ng-model="user.password"/>
+                        <div ng-messages="RegistrationForm.password.$error" role="alert">
+                            <div ng-message-exp="['required']">
+                                Please Enter a password </div>
+                        </div>
+
+                    </md-input-container>
+                    <div align="right">
+                        <a style="color: orange; font-size:small; text-decoration: none" href="" ng-click="forgotPassword()">Forgot Your Password?</a>
+                    </div>
+                    <br>
+                    <br>
+                    <md-card-actions layout="row" layout-align="center">
+                        <div align="center">
+                            <md-button id="submit" class="md-primary md-raised"   ng-disabled="RegistrationForm.$invalid" type="submit">Login</md-button>
+                        </div>
+                    </md-card-actions>
+
+                    <div align="center">
+                        <a style="color: orange; font-size: small; text-decoration: none" href="#register_english">Don't have an account?</a>
+                    </div>
+                </form>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>
